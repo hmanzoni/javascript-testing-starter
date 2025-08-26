@@ -5,6 +5,7 @@ import {
   isPriceInRange,
   isValidUsername,
   validateUserInput,
+  canDrive,
 } from "../src/core";
 
 describe("getCoupons", () => {
@@ -101,4 +102,20 @@ describe("isValidUsername", () => {
     expect(isValidUsername("a".repeat(minLength + 1))).toBe(true);
     expect(isValidUsername("a".repeat(maxLength - 1))).toBe(true);
   });
+});
+
+describe("canDrive", () => {
+  it.each([
+    { age: 15, country: "US", result: false },
+    { age: 16, country: "US", result: true },
+    { age: 17, country: "US", result: true },
+    { age: 16, country: "UK", result: false },
+    { age: 17, country: "UK", result: true },
+    { age: 18, country: "UK", result: true },
+  ])(
+    "should return $result for $age in $country",
+    ({ age, country, result }) => {
+      expect(canDrive(age, country)).toBe(result);
+    }
+  );
 });
