@@ -63,3 +63,14 @@ describe('validateUserInput', ()=>{
         expect(validateUserInput('', 15)).toMatch(/invalid age/i);
     });
 })
+
+describe('isPriceInRange', ()=>{
+    it('should return false when the price is outside the range', ()=>{
+        expect(isPriceInRange(-10, 0, 100)).toBe(false);
+        expect(isPriceInRange(210, 0, 100)).toBe(false);
+    });
+    it('should return true when the price is equal to the min or to the max', ()=>{
+        expect(isPriceInRange(0, 0, 100)).toBe(true);
+        expect(isPriceInRange(100, 0, 100)).toBe(true);
+    });
+})
